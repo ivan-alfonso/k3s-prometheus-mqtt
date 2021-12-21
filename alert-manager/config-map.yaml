@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  config.yml: |-
+    global:
+    receivers:
+      - name: default-receiver
+      - name: ycap-webhook
+        webhook_configs:
+          - url: "http://192.168.0.17:8000/webhook"
+    route:
+      group_wait: 5s
+      group_interval: 1m
+      receiver: default-receiver
+      repeat_interval: 3h
+      
+      routes: 
+        - receiver: ycap-webhook
+          match_re:
+            severity: critical
