@@ -19,12 +19,11 @@ data:
       - alert: InstanceDown
         # Condition for alerting
         expr: mqtt_test{topic="test"} == 10
-        for: 20s
+        for: 10s
         # Annotation - additional informational labels to store more information
         annotations:
-          title: 'test topic 10'
-          #description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute.'
-          adaptations: '{"create_pod":{"pod_name":"pod01","c_name":"pod01","image":"nginx","namespace":"default","requirements":{"memory":"200Mi","cpu":"200m"},"hosts":{"node":{"operator":"In","values":["worker-2","worker-11"]},"layer":{"operator":"In","values":["fog"]}}}}'
+          title: 'Instance {{ $labels.instance }} down'
+          adaptations: '{"create_pod":{"name":"pod01","image":"nginx","namespace":"default","hosts":{"node":{"operator":"In","values":["worker-2","worker-11"]},"layer":{"operator":"In","values":["fog"]}}}}'
         # Labels - additional labels to be attached to the alert
         labels:
           severity: 'critical'

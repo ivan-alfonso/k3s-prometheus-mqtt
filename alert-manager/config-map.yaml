@@ -10,7 +10,8 @@ data:
       - name: default-receiver
       - name: ycap-webhook
         webhook_configs:
-          - url: "http://192.168.0.17:8000/webhook"
+          #- url: "http://10.43.106.102:8000/webhook"
+          - url: "http://adaptation-engine-service.monitoring:8000/webhook"
     route:
       group_wait: 5s
       group_interval: 1m
